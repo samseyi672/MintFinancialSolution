@@ -18,7 +18,15 @@ public class CardService {
 	private RestTemplate template  ;
 	 @Autowired
 	private SSLContextHelper ssl ;
+	  @Autowired
+	private  FormattedCardScheme formattedCard  ;
+	
+	       @Autowired
+		private  CardScheme card  ;
 
+	       @Autowired
+	   	private  CardDetails details  ;
+	       
 	public CardScheme findCardDetails(String url , String cardNumber) {
 		// create  the card  instance here 
 		  ssl.disable();
@@ -32,10 +40,10 @@ public class CardService {
 		  ssl.disable();
 		 String result = template.getForObject(url+"/"+cardNumber, String.class);	     
 		    System.out.println("from "+ result);
-		    CardScheme card  =   template.getForObject(url+"/"+cardNumber,CardScheme.class) ;
-		    CardDetails details  =  new CardDetails();
+		     card  =   template.getForObject(url+"/"+cardNumber,CardScheme.class) ;
+		  //  CardDetails details  =  new CardDetails();
 		     details.setSuccess(true);
-    FormattedCardScheme  formattedCard  = new  FormattedCardScheme() ;
+   // FormattedCardScheme  formattedCard  = new  FormattedCardScheme() ;
         formattedCard.setType(card.getType());
         formattedCard.setScheme(card.getScheme());
         formattedCard.setBank(card.getBank().get("name"));
@@ -43,3 +51,70 @@ public class CardService {
 			   return details ;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

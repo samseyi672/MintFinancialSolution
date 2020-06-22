@@ -38,13 +38,13 @@ public class CardSchemeRestController {
 		   return  card ;
 		}
 	  @GetMapping("/verify/{cardNumber}") //
-		public CardDetails getCardDetailsByNumberFormat(@PathVariable String cardNumber){
+		public ResponseEntity<?> getCardDetailsFormat(@PathVariable String cardNumber){
 			     // calling the service 
 				CardDetails details  =  cardService.findCardDetailsFormatted("https://lookup.binlist.net", cardNumber)  ;			
 			   System.out.println("printing  out the api result");
 			   System.out.println(details);
 	      ResponseEntity<CardDetails> response = new ResponseEntity<CardDetails>(details,HttpStatus.OK) ;
-			   return  details ;
+			   return  response ;
 			}
 	    @GetMapping("")
 	 public ResponseEntity<?> seenPath(){
