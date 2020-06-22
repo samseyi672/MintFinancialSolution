@@ -6,17 +6,15 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CardScheme {
+public class CardScheme extends AbstractCardScheme {
 
 private HashMap<String,String>   bank  ;
 private String type ;
 private String scheme ;
 
 public CardScheme(HashMap<String, String> bank, String type, String scheme) {
-	super();
+	super(type,scheme) ;
 	this.bank = bank;
-	this.type = type;
-	this.scheme = scheme;
 }
 
 public CardScheme() {
@@ -29,22 +27,6 @@ public HashMap<String, String> getBank() {
 
 public void setBank(HashMap<String, String> bank) {
 	this.bank = bank;
-}
-
-public String getType() {
-	return type;
-}
-
-public void setType(String type) {
-	this.type = type;
-}
-
-public String getScheme() {
-	return scheme;
-}
-
-public void setScheme(String scheme) {
-	this.scheme = scheme;
 }
 
 }

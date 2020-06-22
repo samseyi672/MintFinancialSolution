@@ -1,5 +1,8 @@
 package com.mint.financial.controller.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mint.financial.MintFinancialSolutionApplication;
+import com.mint.financial.entity.CardDetails;
 import com.mint.financial.entity.CardScheme;
 import com.mint.financial.service.CardService;
 
@@ -24,16 +28,24 @@ public class CardSchemeRestController {
 	 @Autowired
 	CardService cardService ;
 	
-	  @GetMapping("/verify/{cardNumber}") //
-	public ResponseEntity<?> getCardDetailsByNumber(@PathVariable String cardNumber){
+	  @GetMapping("/format/verify/{cardNumber}") //
+	public CardScheme getCardDetailsByNumber(@PathVariable String cardNumber){
 		     // calling the service 
 			CardScheme card  =  cardService.findCardDetails("https://lookup.binlist.net", cardNumber)  ;
-		   log.info(card.toString());
 		   System.out.println("printing  out the api result");
-      ResponseEntity<CardScheme> response  =   new  ResponseEntity<CardScheme>(card,HttpStatus.OK) ;
-		   return  response ;
+		   log.info(card.toString());
+      ResponseEntity<CardScheme> response = new ResponseEntity<CardScheme>(card,HttpStatus.OK) ;
+		   return  card ;
 		}
-	  
+	  @GetMapping("/verify/{cardNumber}") //
+		public CardDetails getCardDetailsByNumberFormat(@PathVariable String cardNumber){
+			     // calling the service 
+				CardDetails details  =  cardService.findCardDetailsFormatted("https://lookup.binlist.net", cardNumber)  ;			
+			   System.out.println("printing  out the api result");
+			   System.out.println(details);
+	      ResponseEntity<CardDetails> response = new ResponseEntity<CardDetails>(details,HttpStatus.OK) ;
+			   return  details ;
+			}
 	    @GetMapping("")
 	 public ResponseEntity<?> seenPath(){
 		  return new ResponseEntity<String>("seen",HttpStatus.OK) ; 
