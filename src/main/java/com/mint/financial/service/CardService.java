@@ -81,11 +81,12 @@ public class CardService {
 				payLoad.setCardCount(String.valueOf(Integer.parseInt(payLoad.getCardCount()) + 1));
 				e.setPayload(payLoad);
 				payloadRepository.save(e);
-				payLoad = null; // for reusability
-				System.out.println("insert into mongo db");
+				//payLoad = null; // for reusability
+				System.out.println("update  and  processed  hit counts");
 			});
 		} else {
 			payLoad.setBank(details.getPayLoad().getBank());
+			System.out.println(details.getPayLoad().getBank());
 			payLoad.setCardnumber(cardNumber);
 			payLoad.setType(details.getPayLoad().getType());
 			payLoad.setCardCount(COUNT);

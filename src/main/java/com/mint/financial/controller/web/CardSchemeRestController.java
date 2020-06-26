@@ -97,7 +97,8 @@ public class CardSchemeRestController {
 		ResponseEntity<CardDetails> response = new ResponseEntity<CardDetails>(details, HttpStatus.OK);
 		cardService.calculateNoOfHits(cardNumber, details);
        String json = new ObjectMapper().writeValueAsString(details);
-		System.out.println(json);
+       producer.sendCardSchemeMessage2(json);
+		System.out.println(json + " and publishing to  kafka");
 		return json;
 	}
 
